@@ -2,6 +2,7 @@ library synth;
 
 import 'dart:io';
 import 'dart:json';
+import 'dart:async';
 
 part 'src/utils.dart';
 part 'src/middleware.dart';

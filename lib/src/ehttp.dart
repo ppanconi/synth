@@ -25,16 +25,18 @@ class Request implements HttpRequest {
 
   bool get persistentConnection => _req.persistentConnection;
   String get method => _req.method;
-  String get uri => _req.uri;
-  String get path => _req.path;
-  String get queryString => _req.queryString;
-  Map<String, String> get queryParameters => _req.queryParameters;
+  Uri get uri => _req.uri;
+  String get path => _req.uri.path;
+  String get queryString => _req.uri.query;
+  Map<String, String> get queryParameters => _req.uri.queryParameters;
   HttpHeaders get headers => _req.headers;
   List<Cookie> get cookies => _req.cookies;
-  InputStream get inputStream => _req.inputStream;
+//  InputStream get inputStream => _req.inputStream;
+  Stream<List<int>> get inputStream => _req;
   String get protocolVersion => _req.protocolVersion;
   HttpConnectionInfo get connectionInfo => _req.connectionInfo;
-  HttpSession session([init(HttpSession session)]) => _req.session(init);
+//  HttpSession  session([init(HttpSession session)]) => _req.session(init);
+  HttpSession get session => _req.session;
 }
 
 /** Enahnced Response object. */
@@ -45,7 +47,7 @@ class Response implements HttpResponse {
 
   /** Convenient method for writing content in the `Response`#`outputStream`. */
   void write(String content) {
-    outputStream.write(content.charCodes);
+    outputStream.write(content.codeUnits);
   }
 
   int get contentLength => _res.contentLength;
